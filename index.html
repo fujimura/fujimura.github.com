@@ -13,27 +13,54 @@
         margin:1em auto;
         max-width:20em;
       }
-      div#main-outer {
+      div#header-outer {
         float:left;
         text-align:center;
         border:solid 1px #222;
+        margin-bottom:10px;
       }
-      div#main {
+      div#header {
         width: 612px;
         height: 612px;
         background-image: url("earthdom.jpg");
       }
-      h1, p {
+      #header h1, #header p {
         margin:0px;
         font-size:14px;
         float:left;
         clear:both;
       }
-      h1 {
+      #header h1 {
         padding:5px 4px 2px 6px;
       }
-      p {
+      #header p {
         padding:2px 4px 4px 7px;
+      }
+
+      div#content-outer {
+        float:right;
+        text-align:left;
+      }
+      div#content {
+        width: 311px;
+        padding-left: 10px;
+      }
+      #content h2, #content h3, #content p, #content ul {
+        margin:0px;
+        font-size:14px;
+        float:left;
+        clear:both;
+      }
+      #content h2 {
+        padding:5px 4px 2px 6px;
+      }
+      #content p {
+        padding:2px 4px 4px 7px;
+      }
+
+      #content li {
+        text-align:left;
+        margin:0px;
       }
 
       a { color:white; }
@@ -42,10 +69,53 @@
     </style>
   </head>
   <body>
-    <div id="main-outer">
-      <div id="main">
+    <div id="header-outer">
+      <div id="header">
         <h1>Fujimura Daisuke</h1>
         <p>is a <a href='https://github.com/fujimura'>Programmer</a> and <a href="http://www.youtube.com/watch?v=Bw2Y0joMwxc&#t=2m12s">Musician</a></p>
+      </div>
+    </div>
+    <div id="content-outer">
+      <div id="content">
+        <div id='how-i-work'>
+          <h2>How I work</h2>
+          <p>lorem ipsum<p>
+          <p>lorem ipsum<p>
+          <p>lorem ipsum<p>
+        </div>
+        <div id='personality'>
+          <h2>Personality</h2>
+          <p>lorem ipsum<p>
+          <p>lorem ipsum<p>
+          <p>lorem ipsum<p>
+        </div>
+        <div id='skills'>
+          <h2>Skills</h2>
+          <ul>
+            <li>Ruby: 3 years</li>
+            <li>Ruby on Rails: 3 years, 2.3.x and 3.0.x</li>
+            <li>Testing: RSpec, Shoulda and Test::Unit</li>
+            <li>JavaScript: jQuery, prototype.js and 'raw' JavaScript</li>
+            <li>HTML &amp; CSS: please take a look at the code of this page.</li>
+            <li>Databases: MySQL and PostgreSQL, SAP DB</li>
+            <li>Web Servers: Apache, nginx, lighttpd</li>
+            <li>VCS: Git, Subversion</li>
+            <li>Operation Systems: Ubuntu, Debian, some Arch Linux, Mac OS X and windows</li>
+          </ul>
+        </div>
+        <div id='professional-experiences'>
+          <h2>Professional Experiences</h2>
+          <h3>grooves corp December 2009 - Present</h3>
+          <p>lorem ipsum<p>
+          <h3>Yoshida Kamagasako, Inc December 2008 – November 2009</h3>
+          <p>lorem ipsum<p>
+          <h3>Script K.K. April 2006 – August 200</h3>
+          <p>lorem ipsum<p>
+        </div>
+        <div id='education'>
+          <h2>Education</h2>
+          <p>Philosophy 2001 - 2006</p>
+        </div>
       </div>
     </div>
   </body>
