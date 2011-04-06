@@ -3,64 +3,31 @@
   <head>
     <meta charset="utf-8">
     <title>Fujimura Daisuke</title>
+    <script type="text/javascript">
+      window.onload = function(){
+        var $ = function(id) {
+          return document.getElementById(id);
+        }
+        var experiencedYears = function(dateish) {
+          var diff = (new Date()).getTime() - (new Date(dateish)).getTime();
+          return Math.ceil((diff / 100 / 60 / 60 / 24 / 365)) / 10;
+        }
+        var setExperiencedYears = function(id) {
+          $(id).innerText = experiencedYears($(id).getAttribute('data-start'));
+        }
+        setExperiencedYears('ruby-years');
+        setExperiencedYears('rails-years');
+      };
+    </script>
     <style>
       html {
-        font:2em/1.2 Arial, sans-serif;
+        font:1.7em/1.2 Arial, sans-serif;
         color:white;
         background-color:black;
       }
       body {
         margin:1em auto;
-        max-width:20em;
-      }
-      div#header-outer {
-        float:left;
-        text-align:center;
-        border:solid 1px #222;
-        margin-bottom:10px;
-      }
-      div#header {
-        width: 612px;
-        height: 612px;
-        background-image: url("earthdom.jpg");
-      }
-      #header h1, #header p {
-        margin:0px;
-        font-size:14px;
-        float:left;
-        clear:both;
-      }
-      #header h1 {
-        padding:5px 4px 2px 6px;
-      }
-      #header p {
-        padding:2px 4px 4px 7px;
-      }
-
-      div#content-outer {
-        float:right;
-        text-align:left;
-      }
-      div#content {
-        width: 311px;
-        padding-left: 10px;
-      }
-      #content h2, #content h3, #content p, #content ul {
-        margin:0px;
-        font-size:14px;
-        float:left;
-        clear:both;
-      }
-      #content h2 {
-        padding:5px 4px 2px 6px;
-      }
-      #content p {
-        padding:2px 4px 4px 7px;
-      }
-
-      #content li {
-        text-align:left;
-        margin:0px;
+        max-width:40em;
       }
 
       a { color:white; }
@@ -69,54 +36,46 @@
     </style>
   </head>
   <body>
-    <div id="header-outer">
-      <div id="header">
-        <h1>Fujimura Daisuke</h1>
-        <p>is a <a href='https://github.com/fujimura'>Programmer</a> and <a href="http://www.youtube.com/watch?v=Bw2Y0joMwxc&#t=2m12s">Musician</a></p>
-      </div>
+    <div id='header'>
+      <h1>Fujimura Daisuke</h1>
     </div>
-    <div id="content-outer">
-      <div id="content">
-        <div id='how-i-work'>
-          <h2>How I work</h2>
-          <p>lorem ipsum<p>
-          <p>lorem ipsum<p>
-          <p>lorem ipsum<p>
-        </div>
-        <div id='personality'>
-          <h2>Personality</h2>
-          <p>lorem ipsum<p>
-          <p>lorem ipsum<p>
-          <p>lorem ipsum<p>
-        </div>
-        <div id='skills'>
-          <h2>Skills</h2>
-          <ul>
-            <li>Ruby: 3 years</li>
-            <li>Ruby on Rails: 3 years, 2.3.x and 3.0.x</li>
-            <li>Testing: RSpec, Shoulda and Test::Unit</li>
-            <li>JavaScript: jQuery, prototype.js and 'raw' JavaScript</li>
-            <li>HTML &amp; CSS: please take a look at the code of this page.</li>
-            <li>Databases: MySQL and PostgreSQL, SAP DB</li>
-            <li>Web Servers: Apache, nginx, lighttpd</li>
-            <li>VCS: Git, Subversion</li>
-            <li>Operation Systems: Ubuntu, Debian, some Arch Linux, Mac OS X and windows</li>
-          </ul>
-        </div>
-        <div id='professional-experiences'>
-          <h2>Professional Experiences</h2>
-          <h3>grooves corp December 2009 - Present</h3>
-          <p>lorem ipsum<p>
-          <h3>Yoshida Kamagasako, Inc December 2008 – November 2009</h3>
-          <p>lorem ipsum<p>
-          <h3>Script K.K. April 2006 – August 200</h3>
-          <p>lorem ipsum<p>
-        </div>
-        <div id='education'>
-          <h2>Education</h2>
-          <p>Philosophy 2001 - 2006</p>
-        </div>
-      </div>
+    <div id='summary'>
+      <h2>Summary</h2>
+      <p>Experienced generalist web developer.</p>
+     </div>
+    <div id='skills'>
+      <h2>Skills</h2>
+      <ul>
+        <li>Ruby: <span id='ruby-years' data-start='2008/07/01'></span> years</li>
+        <li>Ruby on Rails: <span id='rails-years' data-start='2008/07/01'></span> years, 2.3.x and 3.0.x</li>
+        <li>Testing: RSpec, Shoulda and Test::Unit</li>
+        <li>JavaScript: jQuery, prototype.js and 'raw' JavaScript</li>
+        <li>HTML &amp; CSS: please take a look at the code of this page.</li>
+        <li>Databases: MySQL and PostgreSQL, SAP DB</li>
+        <li>Web Servers: Apache, nginx, lighttpd</li>
+        <li>VCS: Git, Subversion</li>
+        <li>Operation Systems: Ubuntu, Debian, some Arch Linux, Mac OS X and windows</li>
+      </ul>
+    </div>
+    <div id='professional-experiences'>
+      <h2>Professional Experiences</h2>
+      <h3>grooves corp December 2009 - Present</h3>
+      <p>Building some application for recruitment industries using Ruby on Rails.</p>
+      <h3>Yoshida Kamagasako, Inc December 2008 – November 2009</h3>
+      <p>Built social image-sharing service for mobile platform using Ruby on Rails.</p>
+      <h3>Script K.K. April 2006 – August 200</h3>
+      <p>Desigined and built many SAP enhancement modules using WebDynpro for ABAP.<p>
+    </div>
+    <div id='education'>
+      <h2>Education</h2>
+      <h3>Waseda University 2001 - 2006</h3>
+      <p>Majored Philosophy of law.<p>
+    </div>
+    <div id='links'>
+      <h2>Related URLs</h2>
+      <ul>
+        <li><a href='https://github.com/fujimura'>github</a></li>
+      </ul>
     </div>
   </body>
 </html>
