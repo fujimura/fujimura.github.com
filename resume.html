@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Fujimura Daisuke</title>
+    <script type="text/javascript">
+      window.onload = function(){
+        var $ = function(id) {
+          return document.getElementById(id);
+        }
+        var experiencedYears = function(dateish) {
+          var diff = (new Date()).getTime() - (new Date(dateish)).getTime();
+          return Math.ceil((diff / 100 / 60 / 60 / 24 / 365)) / 10;
+        }
+        var setExperiencedYears = function(id) {
+          $(id).innerText = experiencedYears($(id).getAttribute('data-start'));
+        }
+        setExperiencedYears('ruby-years');
+        setExperiencedYears('rails-years');
+      };
+</script>
+<style>
+  body {
+    color:black;
+    background-color:white;
+    font: normal normal 16px Arial, sans-serif;
+    margin: 50px;
+    max-width:50em;
+  }
+
+  h1 { font: normal bold 26px Georgia,Serif; }
+  #header img {
+    height:202px;
+    margin: 30px 10px;
+  }
+  h2        { font-size: 18px; }
+  h3        { font-size: 17px; }
+
+  ul, li, p { margin:10px 0 20px 0; }
+  ul, li        { padding-left:10px; }
+  div#summary p { padding-left:15px; }
+  h3            { padding-left:20px; }
+  p             { padding-left:41px; }
+
+
+  ul { list-style: disc inside;}
+  h2 { margin: 30px 0 15px 0; }
+  h3 { margin: 0 0 10px 0; }
+</style>
+  </head>
+  <body>
+    <div id='header'>
+      <h1>Fujimura Daisuke</h1>
+      <img src='me.jpg'>
+    </div>
+    <div id='summary'>
+      <h2>Summary</h2>
+      <p>Experienced generalist web developer.</p>
+    </div>
+    <div id='skills'>
+      <h2>Skills</h2>
+      <ul>
+        <li>Ruby: <span id='ruby-years' data-start='2008/07/01'></span> years</li>
+        <li>Ruby on Rails: <span id='rails-years' data-start='2008/07/01'></span> years, 2.3.x and 3.0.x</li>
+        <li>Testing: RSpec, Shoulda and Test::Unit</li>
+        <li>JavaScript: jQuery, prototype.js and 'raw' JavaScript</li>
+        <li>HTML &amp; CSS: please take a look at the code of this page.</li>
+        <li>Databases: MySQL and PostgreSQL, SAP DB</li>
+        <li>Web Servers: Apache, nginx, lighttpd</li>
+        <li>VCS: Git, Subversion</li>
+        <li>Operation Systems: Ubuntu, Debian, some Arch Linux, Mac OS X and windows</li>
+        <li>Others: Facebook integration, some Scheme, Clojure and SAP experience</li>
+      </ul>
+    </div>
+    <div id='professional-experiences'>
+      <h2>Professional Experiences</h2>
+      <h3>grooves corp December 2009 - Present</h3>
+      <p>Building three applications for recruitment industries using Ruby on Rails, includes Facebook integration.</p>
+      <h3>Yoshida Kamagasako, Inc December 2008 – November 2009</h3>
+      <p>Built social image-sharing service for japanese mobile platform using Ruby on Rails.</p>
+      <h3>Script K.K. April 2006 – August 2008</h3>
+      <p>Desigined and built many SAP enhancement modules using WebDynpro for ABAP.<p>
+    </div>
+    <div id='education'>
+      <h2>Education</h2>
+      <h3>Waseda University 2001 - 2006</h3>
+      <p>Majored Philosophy of law.<p>
+    </div>
+    <div id='links'>
+      <h2>Related URLs</h2>
+      <ul>
+        <li><a href='https://github.com/fujimura'>github</a></li>
+        <li><a href='https://twitter.com/#!/ffu_'>twitter</a></li>
+        <li><a href='https://www.facebook.com/dfujimura'>facebook</a></li>
+        <li><a href='http://www.last.fm/user/ffu_'>Last.fm</a></li>
+        <li><a href='resume.html'>Resume</a></li>
+      </ul>
+    </div>
+  </body>
+</html>
