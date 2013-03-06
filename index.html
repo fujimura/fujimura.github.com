@@ -7,41 +7,60 @@
     <title>Fujimura Daisuke</title>
     <style>
       body {
-        color:black;
-        background-color: #fffefc;
+        background-color: white;
         font: normal normal 16px Arial, sans-serif;
         margin: 50px auto;
         max-width:50em;
         text-align:center;
       }
-      h1 {
-        font: normal bold 26px Georgia,Serif;
-        letter-spacing: 1px;
+      #contents {
+        position:relative;
+        background-image: url("otaru.jpg");
+        margin: 0 auto;
+        width: 612px;
+        height: 612px;
+        box-shadow: 5px 5px 5px gray;
       }
-      .header img {
-        height:202px;
-        margin: 20px 10px 35px 10px;
-        box-shadow: 2px 2px 2px gray;
+      #contents h1 {
+        position: absolute;
+        color:rgb(27,27,39);
+        top: 100px;
+        left:60px;
+        font: normal 26px Georgia,Serif;
+        letter-spacing: 2px;
       }
-      ul, li {
-        margin:10px 0 10px 0;
-        padding-left:10px;
-        font-size: 19px;
+      #contents p {
+        position: absolute;
+        color:rgb(27,27,39);
+        font: normal 16px Georgia,Serif;
+        letter-spacing: 2px;
+        top: 365px;
+        left: 80px;
       }
-      ul { list-style: none outside;}
-      a {color:black;}
+      #contents ul {
+        list-style: none outside;
+        font: normal normal 16px Georgia,Serif;
+        width: 200px;
+        position: absolute;
+        top: 409px;
+        left: 387px;
+        transform: rotate(7deg);
+        -webkit-transform: rotate(2deg);
+        -ms-transform: rotate(2deg); /* IE 9 */
+        -moz-transform: rotate(2deg); /* Firefox */
+      }
+      a, a:visited {
+        color:rgb(27,27,39);
+      }
       a:hover {
-        color: #fffdf9;
-        background-color:gray;
+        color: rgb(73, 119, 165);
       }
     </style>
   </head>
   <body>
-    <div id='header' class='header'>
+    <div id='contents'>
       <h1>Fujimura Daisuke</h1>
-      <img src='http://www.gravatar.com/avatar/ceda558ac47bd7af518c12a51614664a?s=230'>
-    </div>
-    <div id='links'>
+      <p>is a programmer from Tokyo</p>
       <ul>
         <li><a href='http://blog.fujimuradaisuke.com'>blog</a></li>
         <li><a href='https://github.com/fujimura'>github</a></li>
