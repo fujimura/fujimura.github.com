@@ -1,0 +1,79 @@
+body
+{
+  background  : rgb(255,255,255);
+  font-size   : 16px;
+  font-family : "Arial","sans-serif";
+  margin      : 50px auto 50px auto;
+  max-width   : 50em;
+  text-align  : center;
+}
+
+#contents
+{
+  position           : relative;
+  background-image   : url("otaru.jpg");
+  margin             : 0px auto 0px auto;
+  width              : 612px;
+  height             : 612px;
+  -webkit-box-shadow : 5px 5px 5px rgb(128,128,128);
+  -moz-box-shadow    : 5px 5px 5px rgb(128,128,128);
+  -ms-box-shadow     : 5px 5px 5px rgb(128,128,128);
+  -o-box-shadow      : 5px 5px 5px rgb(128,128,128);
+  box-shadow         : 5px 5px 5px rgb(128,128,128);
+}
+
+.main-header
+{
+  position       : absolute;
+  color          : rgb(27,27,39);
+  top            : 100px;
+  left           : 60px;
+  font-size      : 26px;
+  font-family    : "Georgia","Serif";
+  font-weight    : normal;
+  letter-spacing : 2px;
+}
+
+.main-header-description
+{
+  position    : absolute;
+  color       : rgb(27,27,39);
+  font-family : "Georgia","Serif";
+  font-size   : 16px;
+  top         : 365px;
+  left        : 80px;
+}
+
+.menu
+{
+  list-style        : none outside;
+  font-family       : "Georgia","Serif";
+  font-size         : 14px;
+  position          : absolute;
+  width             : 200px;
+  top               : 397px;
+  left              : 390px;
+  -webkit-transform : rotateX(2deg);
+  -moz-transform    : rotateX(2deg);
+  -ms-transform     : rotateX(2deg);
+  -o-transform      : rotateX(2deg);
+  transform         : rotateX(2deg);
+}
+
+.menu-item
+{
+  padding : 2px 2px 2px 2px;
+}
+
+.menu-item a:visited
+{
+  color : rgb(27,27,39);
+}
+
+.menu-item a:hover
+{
+  color : rgb(73,119,165);
+}
+
+
+/* Generated with Clay, http://fvisser.nl/clay */
