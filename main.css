@@ -1,8 +1,8 @@
 body
 {
+  font-family : "Arial","sans-serif";
   background  : rgb(255,255,255);
   font-size   : 16px;
-  font-family : "Arial","sans-serif";
   margin      : 50px auto 50px auto;
   max-width   : 50em;
   text-align  : center;
@@ -25,11 +25,11 @@ body
 .main-header
 {
   position       : absolute;
-  color          : rgb(27,27,39);
   top            : 100px;
   left           : 60px;
-  font-size      : 26px;
   font-family    : "Georgia","Serif";
+  color          : rgb(27,27,39);
+  font-size      : 26px;
   font-weight    : normal;
   letter-spacing : 2px;
 }
@@ -37,22 +37,22 @@ body
 .main-header-description
 {
   position    : absolute;
-  color       : rgb(27,27,39);
-  font-family : "Georgia","Serif";
-  font-size   : 16px;
   top         : 365px;
   left        : 80px;
+  font-family : "Georgia","Serif";
+  color       : rgb(27,27,39);
+  font-size   : 16px;
 }
 
 .menu
 {
   list-style        : none outside;
-  font-family       : "Georgia","Serif";
-  font-size         : 14px;
   position          : absolute;
-  width             : 200px;
   top               : 397px;
   left              : 390px;
+  font-family       : "Georgia","Serif";
+  font-size         : 14px;
+  width             : 200px;
   -webkit-transform : rotateX(2deg);
   -moz-transform    : rotateX(2deg);
   -ms-transform     : rotateX(2deg);

@@ -11,9 +11,10 @@ main = putCss $ do
 
 theBody :: Css
 theBody = do
+    sansSerifFont
+
     background white
     fontSize (px 16)
-    fontFamily ["Arial", "sans-serif"] []
     sym2 margin 50 auto
     maxWidth (em 50)
     textAlign (alignSide sideCenter)
@@ -29,33 +30,27 @@ theContents = do
 
 theMainHeader :: Css
 theMainHeader = do
-    position absolute
+    placel (px 100) (px 60)
+    serifFont
     color $ rgb 27 27 39
-    top   $ px 100
-    left  $ px 60
     fontSize $ px 26
-    fontFamily ["Georgia", "Serif"] []
     fontWeight normal
     letterSpacing $ px 2
 
 theMainHeaderDescription :: Css
 theMainHeaderDescription = do
-   position absolute
+   placel (px 365) (px 80)
+   serifFont
    color $ rgb 27 27 39
-   fontFamily ["Georgia", "Serif"] []
    fontSize $ px 16
-   top  $ px 365
-   left $ px 80
 
 theMenu :: Css
 theMenu = do
     "list-style" -: "none outside"
-    fontFamily ["Georgia", "Serif"] []
+    placel (px 397) (px 390)
+    serifFont
     fontSize $ px 14
-    position absolute
     width $ px 200
-    top  $ px 397
-    left $ px 390
     transform (rotateX $ deg 2)
 
 theMenuItem :: Css
@@ -63,3 +58,17 @@ theMenuItem = do
     sym padding $ px 2
     a # visited ? color (rgb 27 27 39)
     a # hover   ? color (rgb 73 119 165)
+
+placel :: Size Abs -> Size Abs -> Css
+placel t l = do
+    position absolute
+    top  t
+    left l
+
+-- Typography
+
+serifFont :: Css
+serifFont = fontFamily ["Georgia", "Serif"] []
+
+sansSerifFont :: Css
+sansSerifFont = fontFamily ["Arial", "sans-serif"] []
