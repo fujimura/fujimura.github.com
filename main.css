@@ -46,18 +46,13 @@ body
 
 .menu
 {
-  list-style        : none outside;
-  position          : absolute;
-  top               : 397px;
-  left              : 390px;
-  font-family       : "Georgia","Serif";
-  font-size         : 14px;
-  width             : 200px;
-  -webkit-transform : rotateX(2deg);
-  -moz-transform    : rotateX(2deg);
-  -ms-transform     : rotateX(2deg);
-  -o-transform      : rotateX(2deg);
-  transform         : rotateX(2deg);
+  list-style  : none outside;
+  position    : absolute;
+  top         : 397px;
+  left        : 390px;
+  font-family : "Georgia","Serif";
+  font-size   : 14px;
+  width       : 200px;
 }
 
 .menu-item

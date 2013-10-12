@@ -51,7 +51,7 @@ theMenu = do
     serifFont
     fontSize $ px 14
     width $ px 200
-    transform (rotateX $ deg 2)
+    {-transform (rotateX $ deg 2)-}
 
 theMenuItem :: Css
 theMenuItem = do
