@@ -22,7 +22,7 @@ theBody = do
 theContents :: Css
 theContents = do
     position relative
-    backgroundImage $ url "otaru.jpg"
+    backgroundImage $ url "http://fujimuradaisuke.s3-ap-northeast-1.amazonaws.com/otaru.jpg"
     sym2 margin 0 auto
     width $ px 612
     height $ px 612
