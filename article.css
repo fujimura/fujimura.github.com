@@ -1,6 +1,6 @@
 body {
   color:black;
-  background-color:#FFFEFC;
+  background-color:#FFFEFD;
   font: normal normal 14px Arial, sans-serif;
   margin: 0 auto;
   padding: 10px;
@@ -23,6 +23,11 @@ section {
 }
 
 p {
+  margin: 4px 0 12px 0;
+  padding-left:10px;
+}
+
+pre {
   margin: 4px 0 12px 0;
   padding-left:10px;
 }
