@@ -1,1 +1,6 @@
-exclude: Rakefile, CNAME, css.hs
+exclude:
+  - Rakefile
+  - CNAME
+  - css.hs
+  - articles
+  - sources

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>QuipperでHTML5アプリを作ってる話</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="article.css">
+</head>
+<body>
+<header>
+<h1 class="title">QuipperでHTML5アプリを作ってる話</h1>
+</header>
+<p>9月からQuipperという会社で働いています。 今日はリリース前というのに同僚がすごい勢いでブログエントリを書いている。</p>
+<ul>
+<li><a href="http://blog.kyanny.me/entry/quipper-sense-of-speed">Quipper のスピード感</a></li>
+<li><a href="http://mizchi.hatenablog.com/entry/2013/10/22/124107">自分の強みを生かすこと on Quipper</a></li>
+<li><a href="http://hakobera.hatenablog.com/entry/2013/10/22/133014">Github Issues を利用したリリースマネージャのお仕事</a></li>
+<li><a href="http://dagezi.hatenablog.com/entry/2013/10/22/135057">Quipperでのおじさんエンジニアの立ち位置</a></li>
+</ul>
+<p>同調圧力に負け、僕も書くことにした。</p>
+<p>最近、いわゆるHTML5アプリ(HTML+CSS+JavaScriptのクライアント)を作った。もうすぐリリース。 そこで色々新しいテクノロジーを使ったので、私見を交えつつ簡単にご報告します。</p>
+<section id="chaplin.js" class="level2">
+<h2>Chaplin.js</h2>
+<p>素のBackboneだと、ブートやインスタンス管理の仕組みを作るのが面倒。ここ一年でそれっぽいものを2度作ったので、もうやりたくなかった。 <a href="http://chaplinjs.org/">Chaplin.js</a>はレールがひいてあり、インスタンス管理も行き届いてる。 Brunchで雛形つくれるのもよかった。</p>
+<p>ChaplinはmediatorというApplicatin wideなメッセージングシステムがある。ViewとModelの通信などで大変便利。しかし、これは可読性を一気に下げるえげつないgoto文になるのでほどほどにすべき。</p>
+</section>
+<section id="brunch" class="level2">
+<h2>Brunch</h2>
+<p>今回のクライアントのコードは、最初はAPI用のRailsアプリにassetとして載せていた。あるときこれをやめた。理由は重いのと、CommonJSがそのままだと使えないこと(ChaplinはCommonJSかRequireJS必須)、あと、本質的じゃないこと。RailsはHTML5アプリ(この呼称間違ってるからやめたい)のアセンブラーではない。Gruntにするか<a href="brunch.io">Brunch</a>にするか悩み、Chaplinと相性のよいBrunchにした。</p>
+</section>
+<section id="テスト" class="level2">
+<h2>テスト</h2>
+<p>テストで使ってるライブラリはphantomjs, mocha, chai, sinon, fakerなど。 こんな感じのci用のスクリプトを用意してる。</p>
+<pre><code>#! /bin/sh
+set -e
+
+export BRUNCH_ENV=ci
+gem install sass --install-dir=./gems
+gem install compass --install-dir=./gems
+npm install brunch
+npm install mocha-phantomjs
+npm install bower
+npm install
+
+./node_modules/bower/bin/bower install
+./node_modules/brunch/bin/brunch build
+
+./node_modules/mocha-phantomjs/bin/mocha-phantomjs public/test/index.html</code></pre>
+</section>
+<section id="その他" class="level2">
+<h2>その他</h2>
+<p>CoffeeScriptは当然採択。生JavaScriptはきつい。underscore.jsとリスト内包表記でバリバリとリスト操作してる。</p>
+<p>テンプレートエンジンはHandlebars、これはHaml系に慣れてないメンバーが多かったから。今考えるとHaml、Jadeなど閉じタグの無いものにすべきだった。Handlebarsはやはり冗長で生産性低い。タグの閉じ忘れにも何度か苦しめられた。</p>
+<p>データバインディングはbackbone.stickit。信頼のNew York Timesプロダクト。使いやすく便利なんだけど、APIや仕様との相性の都合もあって、ちょっとしか使ってない。</p>
+<p>CSSはScssで書いた。BEMなどのメソドロジーは使ってない。色は <code>_colors.scss</code> 内に書いた変数で管理、ボタン用のmixinを使うなど、よくある感じです。今考えるとTwitter Bootstrapを使えばよかったと思う。</p>
+<p>jQuery.Deferredを多用した。パフォーマンス向上、可読性アップ、描画タイミングを揃えて見栄えを良くする、画像先読みなど大活躍だった。</p>
+<p>フロントエンドのライブラリはbowerで管理。ただfont-awesomeなど例外はある。</p>
+</section>
+<section id="まとめ" class="level2">
+<h2>まとめ</h2>
+<p>Chaplin.jsはなかなか良いです。もう素のBackbone.jsは書きたくない。</p>
+<p>API*2 + clientを一度に動かすrake taskとかも書いたので、いつか紹介したい。まじ辛かった。</p>
+<p>個人的にはそろそろWeb API書きたいなーとも思います。</p>
+<p>あと、プロジェクトの合間にHaskellで<code>bundle gem</code>、<code>grunt init</code>的なことをする<a href="https://github.com/fujimura/hi">hi</a>ってライブラリを書いたので、試してみてね！</p>
+<p>エンジニアも募集してるので、面白いなーと思ったら、<a href="http://www.quipper.com/japan/careers">こちら</a>か<a href="twitter.com/ffu_">僕</a>までご連絡ください。</p>
+</section>
+<footer>
+  <div id="back-to-top">
+    <a href="http://fujimuradaisuke.com">http://fujimuradaisuke.com</a>
+  </div>
+<a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+<script>
+  !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+</script>
+
+<a href="http://b.hatena.ne.jp/entry/http://fujmuradaisuke.com/two_tech_stacks.html" class="hatena-bookmark-button" data-hatena-bookmark-title="二つの技術選定プランと知識社会 - fujimuradaisuke.com" data-hatena-bookmark-layout="standard-balloon" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+</footer>
+<div id="nav">
+</div>
+</body>
+</html>
