@@ -2,11 +2,9 @@
 
 ##
 
-みなさん、Haskellで新しく何かを書き始める時ってどうしてますか。`cabal init`でcabalファイルを生成した後。
-最近の定番ディレクトリ構成は`/src`にコード、`/test`にテストコードってパターンが多いですね。それ自作するの、辛くないですか。
+みなさん、Haskellで新しく何かを書き始める時ってどうしてますか。最近の定番ディレクトリ構成は`/src`にコード、`/test`にテストコードってパターンが多いですね。それ自作するの、辛くないですか。
 
-ある時何かを作ろうと思って`cabal init`を打鍵したら、ふと「もう自分で`/src`と`/test`ディレクトリ作って`/test/Spec.hs`書くのはウンザリだ。許せない」と感じました。そして、作ろうとしていた何かをそっちのけで、Haskellプロジェクトのひな形生成ツールを作り始めました。それが[hi](https://github.com/fujimura/hi)です。
-
+数ヶ月前に何かを作ろうと思い`cabal init`を実行した時、「もう自分で`/src`と`/test`ディレクトリ作って`/test/Spec.hs`書くのはウンザリ」と感じ、作ろうとしていた何かをそっちのけでHaskellプロジェクトのひな形生成ツールを作り始めました。それが[hi](https://github.com/fujimura/hi)です。
 
 例えばRubyだと[bundler](http://bundler.io)というライブラリを使って、下記のように新しいプロジェクトを生成できます。
 
@@ -23,7 +21,7 @@ $ bundle gem foo
 Initializating git repo in /Users/fujimura/foo
 ```
 
-こういうものを作りたいと思ったわけです。下記のようなデザインにすることにしました。
+こういうものを作りたいと思ったわけです。色々考えた結果、下記のようなデザインにすることにしました。
 
 - 対話式インターフェース無し
 - できるだけ少ないオプション
@@ -31,9 +29,9 @@ Initializating git repo in /Users/fujimura/foo
 - テンプレートはgitリポジトリ形式の指定
 - 設定ファイルで可能
 
-テンプレートをgitリポジトリにする点など、[grunt-init](http://gruntjs.com/project-scaffolding)というJavaScriptのライブラリのデザインを参考にしました。対話式インターフェース無し、少ないオプションなどは僕の趣味です。
+テンプレートをgitリポジトリにするあたりは[grunt-init](http://gruntjs.com/project-scaffolding)というJavaScriptのライブラリを参考にしました。対話式インターフェース無し、少ないオプションなどは僕の趣味です。
 
-結果的に、下記のように新しいプロジェクトを生成できるものが作れました。
+結果的に、こんな感じで新しいプロジェクトを生成できるようになりました。
 テストをHspecで書く場合の定番ディレクトリ構成をデフォルトテンプレートにしています。
 
 ```
@@ -49,7 +47,7 @@ Creating new project from repository: git://github.com/fujimura/hi-hspec.git
     create  foo-bar-baz/test/Spec.hs
 ```
 
-生成したテンプレートは失敗するテストケースを含んでいます。
+もちろんビルド可能です。失敗するテストケースを一件入れてあります。
 
 ```
 $ cabal test
@@ -94,12 +92,12 @@ Creating new project from repository: git@github.com:fujimura/hi-flat.git
 
 以下、実装時のこぼれ話です。
 
-コーディング規約は[tibbe/haskell-style-guide](https://github.com/tibbe/haskell-style-guide)を踏襲しました。あんまり厳密にはやっていません。いわゆる[full import](http://d.hatena.ne.jp/camlspotter/20101212/1292165692)はしないようにしています。自分で書いたコードを読むにあたっても圧倒的にわかりやすかった。
+コーディング規約は[tibbe/haskell-style-guide](https://github.com/tibbe/haskell-style-guide)を踏襲しました。が、あんまり厳密にはやっていません。いわゆる[full import](http://d.hatena.ne.jp/camlspotter/20101212/1292165692)はしないようにしています。自分で書いたコードを読むにあたっても圧倒的にわかりやすかった。
 
-Hackageへのアップロードはtarballを作ってcabalのコマンドを叩くのですが、一応出来たものが正しく動くかテストを実行したいところです。一連の作業をやってくれる[便利なスクリプト](https://github.com/hspec/hspec/blob/7e67dc4918781f1c57aea17836ea8f35f8a0bf72/mk-sdist.sh)がHspecのリポジトリにあったので有難く頂戴しました。
+Hackageには、tarballを作ってcabalのコマンドからアップロードするのですが、その前に一応出来たものが正しく動くかテストを実行したいところです。一連の作業をやってくれる[便利なスクリプト](https://github.com/hspec/hspec/blob/7e67dc4918781f1c57aea17836ea8f35f8a0bf72/mk-sdist.sh)がHspecのリポジトリにあったので有難く真似させて頂きました。
 
 エディタはVimを使っています。[ghc-mod](https://github.com/kazu-yamamoto/ghc-mod) + [syntastic](https://github.com/scrooloose/syntastic)で保存されたらコンパイルしてエラーがあれば表示されるようにしてます。あと[stylish-haskell](https://github.com/jaspervdj/stylish-haskell)でコードのフォーマットをしてます。これは[Vimからで実行できます](https://github.com/jaspervdj/stylish-haskell#vim-integration)。
 
-最初スケッチ的な実装をした後、TDDで書き直しました。Haskellで関数ごとに細かいユニットテストをするのは割にあわないという認識でして、今回はいちばん外側からのみテストする戦略をとりました。具体的にはテスト用ディレクトリの中で実際に`$ hi`を実行し、結果を検証するという方法です。テスト後のディレクトリのお掃除などは自分で頑張っていたのですが([bracket_](http://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Exception.html#v:bracket_)を使えばOK)、途中でHspecに[before](http://hackage.haskell.org/package/hspec-1.7.2.1/docs/Test-Hspec.html#v:before)などが入ったので助かった。最終的にはメインの関数だけは個別にテストするようにしました[*](https://github.com/fujimura/hi/blob/b8531241ea796b24dd7075b817d48a5af8d4d315/test/HiSpec.hs)。この戦略、言うまでもなく並列実行するとコケるのでそこは残念です。今後は外側からのテストを最小限にしたい。
+最初スケッチ的な実装をした後、TDDで書き直しました。私、Haskellで関数ごとに細かいユニットテストをするのは割に合わないという認識でして、今回はいちばん外側からのみテストする戦略をとりました。具体的にはテスト用ディレクトリの中で実際に`$ hi`を実行し、結果を検証するという方法です。テスト後のディレクトリのお掃除などは自分で頑張っていたのですが([bracket_](http://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Exception.html#v:bracket_)を使えばOK)、途中でHspecに[before](http://hackage.haskell.org/package/hspec-1.7.2.1/docs/Test-Hspec.html#v:before)などが入ったのでそれを使いました。タイミング良かった。最終的にはメインの関数だけは個別にテストするようにしました[*](https://github.com/fujimura/hi/blob/b8531241ea796b24dd7075b817d48a5af8d4d315/test/HiSpec.hs)。言うまでもなくこの戦略だと並列実行するとテストがコケるのでそこは残念です。今後は外側からのテストは最小限にしたい。
 
-他にも色々な苦労と迷走がありました。とりあえずモジュール構成が適当なところを治したいです。また今後追加予定の機能もいくつかあります。興味がある方はコードを読んでみてください。
+他にも色々な苦労と迷走がありました。モジュール構成が変、テンプレートに依存したテストケースが多い、など未解決のしょぼいポイントも多々あります。追加予定の機能もいくつか。興味がある方はコードを読んでみてください。リポジトリは[https://github.com/fujimura/hi](https://github.com/fujimura/hi)です。
