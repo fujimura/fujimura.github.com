@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <title>Haskellプロジェクトのひな形生成ツールを作った</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link rel="stylesheet" href="normalize.css">
+  <link rel="stylesheet" href="article.css">
+</head>
+<body>
+<header>
+<h1 class="title">Haskellプロジェクトのひな形生成ツールを作った</h1>
+</header>
+<section id="section" class="level2">
+<h2></h2>
+<p>みなさん、Haskellで新しく何かを書き始める時ってどうしてますか。<code>cabal init</code>でcabalファイルを生成した後。 最近の定番ディレクトリ構成は<code>/src</code>にコード、<code>/test</code>にテストコードってパターンが多いですね。それ自作するの、辛くないですか。</p>
+<p>ある時何かを作ろうと思って<code>cabal init</code>を打鍵したら、ふと「もう自分で<code>/src</code>と<code>/test</code>ディレクトリ作って<code>/test/Spec.hs</code>書くのはウンザリだ。許せない」と感じました。そして、作ろうとしていた何かをそっちのけで、Haskellプロジェクトのひな形生成ツールを作り始めました。それが<a href="https://github.com/fujimura/hi">hi</a>です。</p>
+<p>例えばRubyだと<a href="http://bundler.io">bundler</a>というライブラリを使って、下記のように新しいプロジェクトを生成できます。</p>
+<pre><code>$ bundle gem foo
+      create  foo/Gemfile
+      create  foo/Rakefile
+      create  foo/LICENSE.txt
+      create  foo/README.md
+      create  foo/.gitignore
+      create  foo/foo.gemspec
+      create  foo/lib/foo.rb
+      create  foo/lib/foo/version.rb
+Initializating git repo in /Users/fujimura/foo</code></pre>
+<p>こういうものを作りたいと思ったわけです。下記のようなデザインにすることにしました。</p>
+<ul>
+<li>対話式インターフェース無し</li>
+<li>できるだけ少ないオプション</li>
+<li>複数テンプレートをサポート</li>
+<li>テンプレートはgitリポジトリ形式の指定</li>
+<li>設定ファイルで可能</li>
+</ul>
+<p>テンプレートをgitリポジトリにする点など、<a href="http://gruntjs.com/project-scaffolding">grunt-init</a>というJavaScriptのライブラリのデザインを参考にしました。対話式インターフェース無し、少ないオプションなどは僕の趣味です。</p>
+<p>結果的に、下記のように新しいプロジェクトを生成できるものが作れました。 テストをHspecで書く場合の定番ディレクトリ構成をデフォルトテンプレートにしています。</p>
+<pre><code>$ hi --package-name &quot;foo-bar-baz&quot; --module-name &quot;Foo.Bar.Baz&quot;
+Creating new project from repository: git://github.com/fujimura/hi-hspec.git
+    create  foo-bar-baz/.gitignore
+    create  foo-bar-baz/LICENSE
+    create  foo-bar-baz/README.md
+    create  foo-bar-baz/foo-bar-baz.cabal
+    create  foo-bar-baz/src/Foo/Bar/Baz.hs
+    create  foo-bar-baz/src/Foo/Bar/Baz/Internal.hs
+    create  foo-bar-baz/test/Foo/Bar/BazSpec.hs
+    create  foo-bar-baz/test/Spec.hs</code></pre>
+<p>生成したテンプレートは失敗するテストケースを含んでいます。</p>
+<pre><code>$ cabal test
+Building foo-bar-baz-0.0.0...
+Preprocessing library foo-bar-baz-0.0.0...
+In-place registering foo-bar-baz-0.0.0...
+Preprocessing test suite &#39;spec&#39; for foo-bar-baz-0.0.0...
+Running 1 test suites...
+Test suite spec: RUNNING...
+
+Foo.Bar.Baz
+  someFunction
+    - should work fine FAILED [1]
+
+1) Foo.Bar.Baz.someFunction should work fine
+expected: False
+ but got: True
+
+Randomized with seed 4611685480328648939
+
+Finished in 0.0003 seconds
+1 example, 1 failure
+Test suite spec: FAIL
+Test suite logged to: dist/test/foo-bar-baz-0.0.0-spec.log
+0 of 1 test suites (0 of 1 test cases) passed.</code></pre>
+<p>テスト無し、フラットなディレクトリ構成のテンプレートもあります。</p>
+<pre><code>$ hi-m Bar -p bar -r git@github.com:fujimura/hi-flat.git
+Creating new project from repository: git@github.com:fujimura/hi-flat.git
+    create  bar/.gitignore
+    create  bar/LICENSE
+    create  bar/Main.hs
+    create  bar/Bar.hs
+    create  bar/README.md
+    create  bar/bar.cabal</code></pre>
+<p>テンプレートは自作可能です。<a href="https://github.com/fujimura/hi#making-your-own-project-template">Making your own project template</a>を参照ください。</p>
+<p>以下、実装時のこぼれ話です。</p>
+<p>コーディング規約は<a href="https://github.com/tibbe/haskell-style-guide">tibbe/haskell-style-guide</a>を踏襲しました。あんまり厳密にはやっていません。いわゆる<a href="http://d.hatena.ne.jp/camlspotter/20101212/1292165692">full import</a>はしないようにしています。自分で書いたコードを読むにあたっても圧倒的にわかりやすかった。</p>
+<p>Hackageへのアップロードはtarballを作ってcabalのコマンドを叩くのですが、一応出来たものが正しく動くかテストを実行したいところです。一連の作業をやってくれる<a href="https://github.com/hspec/hspec/blob/7e67dc4918781f1c57aea17836ea8f35f8a0bf72/mk-sdist.sh">便利なスクリプト</a>がHspecのリポジトリにあったので有難く頂戴しました。</p>
+<p>エディタはVimを使っています。<a href="https://github.com/kazu-yamamoto/ghc-mod">ghc-mod</a> + <a href="https://github.com/scrooloose/syntastic">syntastic</a>で保存されたらコンパイルしてエラーがあれば表示されるようにしてます。あと<a href="https://github.com/jaspervdj/stylish-haskell">stylish-haskell</a>でコードのフォーマットをしてます。これは<a href="https://github.com/jaspervdj/stylish-haskell#vim-integration">Vimからで実行できます</a>。</p>
+<p>最初スケッチ的な実装をした後、TDDで書き直しました。Haskellで関数ごとに細かいユニットテストをするのは割にあわないという認識でして、今回はいちばん外側からのみテストする戦略をとりました。具体的にはテスト用ディレクトリの中で実際に<code>$ hi</code>を実行し、結果を検証するという方法です。テスト後のディレクトリのお掃除などは自分で頑張っていたのですが(<a href="http://hackage.haskell.org/package/base-4.6.0.1/docs/Control-Exception.html#v:bracket_">bracket_</a>を使えばOK)、途中でHspecに<a href="http://hackage.haskell.org/package/hspec-1.7.2.1/docs/Test-Hspec.html#v:before">before</a>などが入ったので助かった。最終的にはメインの関数だけは個別にテストするようにしました<a href="https://github.com/fujimura/hi/blob/b8531241ea796b24dd7075b817d48a5af8d4d315/test/HiSpec.hs">*</a>。この戦略、言うまでもなく並列実行するとコケるのでそこは残念です。今後は外側からのテストを最小限にしたい。</p>
+<p>他にも色々な苦労と迷走がありました。とりあえずモジュール構成が適当なところを治したいです。また今後追加予定の機能もいくつかあります。興味がある方はコードを読んでみてください。</p>
+</section>
+<footer>
+  <div id="back-to-top">
+    <a href="http://fujimuradaisuke.com">http://fujimuradaisuke.com</a>
+  </div>
+  <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+  <script>
+    !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
+  </script>
+</footer>
+</body>
+</html>
