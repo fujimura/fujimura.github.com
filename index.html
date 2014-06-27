@@ -6,9 +6,16 @@
     <link rel="icon" href="favicon.ico">
     <title>Fujimura Daisuke</title>
     <link rel="stylesheet" href="main.css">
+    <script>
+      img = new Image;
+      img.src = "http://fujimuradaisuke.s3-ap-northeast-1.amazonaws.com/otaru.jpg";
+      img.onload = function(){
+        document.getElementById("contents").style.display = "block";
+      }
+    </script>
   </head>
   <body>
-    <div id='contents'>
+    <div id='contents' class='animated fadeIn' style='display: none;'>
       <h1 class="main-header">Fujimura Daisuke</h1>
       <p class="main-header-description">is a programmer from Tokyo</p>
       <ul class="menu">

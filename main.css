@@ -70,5 +70,38 @@ body
   color : rgb(73,119,165);
 }
 
+.animated {
+  -webkit-animation-duration  : 500ms;
+  animation-duration          : 500ms;
+  -webkit-animation-fill-mode : both;
+  animation-fill-mode         : both
+}
+
+
+@-webkit-keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name : fadeIn;
+  animation-name         : fadeIn
+}
+
 
 /* Generated with Clay, http://fvisser.nl/clay */
