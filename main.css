@@ -1,107 +1,97 @@
-body
-{
-  font-family : "Arial","sans-serif";
-  background  : rgb(255,255,255);
-  font-size   : 16px;
-  margin      : 50px auto 50px auto;
-  max-width   : 50em;
-  text-align  : center;
+body {
+  font-family: "Arial", "sans-serif";
+  background: rgb(255, 255, 255);
+  font-size: 16px;
+  margin: 50px auto 50px auto;
+  max-width: 50em;
+  text-align: center;
 }
 
-#contents
-{
-  position           : relative;
-  background-image   : url("http://fujimuradaisuke.s3-ap-northeast-1.amazonaws.com/otaru.jpg");
-  margin             : 0px auto 0px auto;
-  width              : 612px;
-  height             : 612px;
-  -webkit-box-shadow : 5px 5px 5px rgb(128,128,128);
-  -moz-box-shadow    : 5px 5px 5px rgb(128,128,128);
-  -ms-box-shadow     : 5px 5px 5px rgb(128,128,128);
-  -o-box-shadow      : 5px 5px 5px rgb(128,128,128);
-  box-shadow         : 5px 5px 5px rgb(128,128,128);
+#contents {
+  position: relative;
+  background-image: url("http://fujimuradaisuke.s3-ap-northeast-1.amazonaws.com/otaru.jpg");
+  margin: 0px auto 0px auto;
+  width: 612px;
+  height: 612px;
+  -webkit-box-shadow: 5px 5px 5px rgb(128, 128, 128);
+  -moz-box-shadow: 5px 5px 5px rgb(128, 128, 128);
+  -ms-box-shadow: 5px 5px 5px rgb(128, 128, 128);
+  -o-box-shadow: 5px 5px 5px rgb(128, 128, 128);
+  box-shadow: 5px 5px 5px rgb(128, 128, 128);
 }
 
-.main-header
-{
-  position       : absolute;
-  top            : 100px;
-  left           : 60px;
-  font-family    : "Georgia","Serif";
-  color          : rgb(27,27,39);
-  font-size      : 26px;
-  font-weight    : normal;
-  letter-spacing : 2px;
+.main-header {
+  position: absolute;
+  top: 100px;
+  left: 60px;
+  font-family: "Georgia", "Serif";
+  color: rgb(27, 27, 39);
+  font-size: 26px;
+  font-weight: normal;
+  letter-spacing: 2px;
 }
 
-.main-header-description
-{
-  position    : absolute;
-  top         : 365px;
-  left        : 80px;
-  font-family : "Georgia","Serif";
-  color       : rgb(27,27,39);
-  font-size   : 16px;
+.main-header-description {
+  position: absolute;
+  top: 365px;
+  left: 80px;
+  font-family: "Georgia", "Serif";
+  color: rgb(27, 27, 39);
+  font-size: 16px;
 }
 
-.menu
-{
-  list-style  : none outside;
-  position    : absolute;
-  top         : 397px;
-  left        : 390px;
-  font-family : "Georgia","Serif";
-  font-size   : 14px;
-  width       : 200px;
+.menu {
+  list-style: none outside;
+  position: absolute;
+  top: 397px;
+  left: 390px;
+  font-family: "Georgia", "Serif";
+  font-size: 14px;
+  width: 200px;
 }
 
-.menu-item
-{
-  padding : 2px 2px 2px 2px;
+.menu-item {
+  padding: 2px 2px 2px 2px;
 }
 
-.menu-item a:visited
-{
-  color : rgb(27,27,39);
+.menu-item a:visited {
+  color: rgb(27, 27, 39);
 }
 
-.menu-item a:hover
-{
-  color : rgb(73,119,165);
+.menu-item a:hover {
+  color: rgb(73, 119, 165);
 }
 
 .animated {
-  -webkit-animation-duration  : 500ms;
-  animation-duration          : 500ms;
-  -webkit-animation-fill-mode : both;
-  animation-fill-mode         : both
+  -webkit-animation-duration: 500ms;
+  animation-duration: 500ms;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
 }
-
 
 @-webkit-keyframes fadeIn {
   0% {
-    opacity: 0
+    opacity: 0;
   }
 
   100% {
-    opacity: 1
+    opacity: 1;
   }
 }
 
 @keyframes fadeIn {
   0% {
-    opacity: 0
+    opacity: 0;
   }
 
   100% {
-    opacity: 1
+    opacity: 1;
   }
 }
 
 .fadeIn {
-  -webkit-animation-name : fadeIn;
-  animation-name         : fadeIn
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
 }
-
 
 /* Generated with Clay, http://fvisser.nl/clay */
