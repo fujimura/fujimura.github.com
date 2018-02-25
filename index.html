@@ -2,30 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1, user-scalable=no" name="viewport">
     <link rel="shortcut icon" href="favicon.ico">
     <link rel="icon" href="favicon.ico">
     <title>Fujimura Daisuke</title>
     <link rel="stylesheet" href="main.css">
     <script>
       img = new Image;
-      img.src = "http://fujimuradaisuke.s3-ap-northeast-1.amazonaws.com/otaru.jpg";
+      img.src = "/earthdom.jpg";
       img.onload = function(){
-        document.getElementById("contents").style.display = "block";
+        var main = document.querySelector(".main")
+        main.style.backgroundImage = "url('" + img.src + "')";
+          main.style.display = "block";
       }
     </script>
   </head>
   <body>
-    <div id='contents' class='animated fadeIn' style='display: none;'>
-      <h1 class="main-header">Fujimura Daisuke</h1>
-      <p class="main-header-description">is a programmer from Tokyo</p>
-      <ul class="menu">
-        <li class='menu-item'><a href='http://fujimura.hatenablog.com/'>blog</a></li>
-        <li class='menu-item'><a href='https://github.com/fujimura'>github</a></li>
-        <li class='menu-item'><a href='https://twitter.com/ffu_'>twitter</a></li>
-        <li class='menu-item'><a href='https://www.facebook.com/dfujimura'>facebook</a></li>
-        <li class='menu-item'><a href='http://instagram.com/ffu_'>Instagram</a></li>
-        <li class='menu-item'><a href='https://speakerdeck.com/fujimura'>Speaker Deck</a></li>
-      </ul>
+  <div class='main animated fadeIn' style='display: none;'>
+    <h1>Fujimura Daisuke</h1>
+    <ul>
+      <li><a href='http://fujimura.hatenablog.com/'>blog</a></li>
+      <li><a href='https://github.com/fujimura'>github</a></li>
+      <li><a href='https://twitter.com/ffu_'>twitter</a></li>
+      <li><a href='https://www.facebook.com/dfujimura'>facebook</a></li>
+      <li><a href='http://instagram.com/ffu_'>Instagram</a></li>
+      <li><a href='https://speakerdeck.com/fujimura'>Speaker Deck</a></li>
+    </ul>
     </div>
   </body>
 </html>
